@@ -1,0 +1,11 @@
+{
+  "title": { "message": "Last Session" },
+  "description": { "message": "Show tabs that were not closed when the window was last closed" },
+  "openAll": { "message": "Open all" },
+  "viewHistory": { "message": "View History" },
+  "funcTypeLabel": { "message": "Select the function of click Icon" },
+  "funcTypeLabel_1": { "message": "Undo" },
+  "funcTypeLabel_2": { "message": "Open Last Session Page in Tab" },
+  "funcTypeLabel_3": { "message": "Open Last Session Page in Popup" },
+  "copyToClipboard": { "message": "Copy to clipboard" }
+}

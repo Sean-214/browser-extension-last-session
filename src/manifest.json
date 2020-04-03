@@ -1,0 +1,35 @@
+{
+  "manifest_version": 2,
+  "name": "__MSG_title__",
+  "version": "${version}",
+  "minimum_chrome_version": "70.0.0.0",
+  "description": "__MSG_description__",
+  "author": "Sean-214",
+  "homepage_url": "https://github.com/Sean-214/browser-extension-last-session",
+  "default_locale": "zh_CN",
+  "icons": {
+    "16": "assets/icons/icon-16.png",
+    "32": "assets/icons/icon-32.png",
+    "48": "assets/icons/icon-48.png",
+    "128": "assets/icons/icon-128.png"
+  },
+  "browser_action": {
+    "default_title": "__MSG_title__"
+  },
+  "options_ui": {
+    "page": "${options_ui.page}",
+    "open_in_tab": false,
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "permissions": [
+    "*://*/*",
+    "file:///*",
+    "sessions",
+    "storage",
+    "tabs"
+  ]
+}

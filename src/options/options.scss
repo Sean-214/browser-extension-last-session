@@ -1,0 +1,42 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.form {
+  padding: 10px 20px;
+  .form-item {
+    margin: 15px 0;
+    padding: 0;
+    min-height: 40px;
+    .form-item-label {
+      overflow: auto;
+      overflow-wrap: break-word;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 20px;
+      color: #262626;
+    }
+    label {
+      .form-item-label,
+      .form-item-content,
+      select {
+        cursor: pointer;
+      }
+    }
+    .form-item-content {
+      padding: 0 10px;
+    }
+    button {
+      cursor: pointer;
+    }
+  }
+  .form-item.right {
+    text-align: right;
+  }
+}
+
+#url {
+  word-break: break-all;
+}

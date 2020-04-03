@@ -1,0 +1,142 @@
+html,
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  min-width: 750px;
+  min-height: 400px;
+}
+ul,
+li {
+  list-style: none;
+}
+
+/* 布局 */
+.content {
+  margin: 0 auto;
+  min-width: 710px;
+  max-width: 960px;
+}
+.header {
+  padding: 0 20px;
+  border-bottom: 1px solid #eeeeee;
+  height: 60px;
+  .content {
+    position: relative;
+    #title {
+      position: absolute;
+      top: 14px;
+      left: 0;
+      font-weight: normal;
+    }
+    .right {
+      position: absolute;
+      top: 20px;
+      right: 0;
+      .btn {
+        margin-left: 10px;
+        font-size: 14px;
+        color: #0000ee;
+        cursor: pointer;
+      }
+      .btn:hover {
+        margin-left: 10px;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+.main {
+  padding: 20px;
+}
+
+/* 标签列表 */
+#tab-list {
+  li {
+    position: relative;
+    height: 30px;
+    // 删除按钮
+    .btn {
+      position: absolute;
+      top: 7px;
+      left: 10px;
+      display: block;
+      width: 16px;
+      height: 16px;
+      line-height: 16px;
+      font-size: 14px;
+      color: #999999;
+      text-align: center;
+      cursor: pointer;
+    }
+    .btn:hover {
+      color: #ffffff !important;
+      background-color: #ff0000;
+    }
+    // 标签图标
+    .icon {
+      position: absolute;
+      top: 6px;
+      left: 36px;
+      display: block;
+      width: 18px;
+      height: 18px;
+    }
+    .icon.iconfont {
+      line-height: 18px;
+      font-size: 18px;
+    }
+    // 标签标题
+    .title {
+      position: absolute;
+      top: 7px;
+      left: 64px;
+      right: 10px;
+      display: block;
+      height: 16px;
+      line-height: 16px;
+      font-size: 14px;
+      color: #000000;
+      text-decoration: none;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      cursor: pointer;
+    }
+    .title:hover {
+      color: #0066cc;
+      text-decoration: underline;
+    }
+  }
+  // 标签鼠标悬停
+  li:hover {
+    background-color: #e7f5ff;
+    // 删除按钮
+    .btn {
+      color: #666666;
+    }
+  }
+  // 标签删除状态
+  li.removed {
+    // 标签图标
+    .icon {
+      opacity: 0.4;
+    }
+    // 标签标题
+    .title {
+      color: #cccccc;
+      text-decoration: line-through;
+    }
+  }
+}

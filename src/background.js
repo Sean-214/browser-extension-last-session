@@ -1,0 +1,40 @@
+import storage from './lib/storage';
+import browserAction from './lib/browser-action';
+import sessions from './lib/sessions';
+import tabs from './lib/tabs';
+import windows from './lib/windows';
+
+// 初始化
+chrome.runtime.onInstalled.addListener(async () => {
+  await storage.clear();
+});
+
+// 监听消息
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  (async () => {
+    if (chrome.runtime.id !== sender.id) {
+      return sendResponse();
+    }
+    if (message.code === 'getLastSession') {
+      const lastSession = await sessions.getLastSession();
+      sendResponse(lastSession);
+    } else if (message.code === 'setRemoved') {
+      await sessions.setRemoved(message.data.url, message.data.removed);
+      sendResponse();
+    }
+  })();
+  return true;
+});
+
+// 窗口创建后，获取上次关闭窗口时未关闭的标签
+windows.addCreatedListener();
+
+// 标签更新后缓存标签信息，用于获取"favIconUrl"
+tabs.addUpdatedListener();
+
+// 监听扩展程序按钮单击事件
+browserAction.addClickedListener();
+
+(async () => {
+  await browserAction.setFuncType();
+})();

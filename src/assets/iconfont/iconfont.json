@@ -1,0 +1,23 @@
+{
+  "id": "1678094",
+  "name": "Last Session",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "11755918",
+      "name": "文件",
+      "font_class": "file",
+      "unicode": "e6ff",
+      "unicode_decimal": 59135
+    },
+    {
+      "icon_id": "1117920",
+      "name": "关闭",
+      "font_class": "close",
+      "unicode": "e781",
+      "unicode_decimal": 59265
+    }
+  ]
+}
