@@ -15,12 +15,15 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (chrome.runtime.id !== sender.id) {
       return sendResponse();
     }
-    if (message.code === 'getLastSession') {
-      const lastSession = await sessions.getLastSession();
-      sendResponse(lastSession);
-    } else if (message.code === 'setRemoved') {
-      await sessions.setRemoved(message.data.url, message.data.removed);
-      sendResponse();
+    switch (message.command) {
+      case 'getLastSession':
+        const lastSession = await sessions.getLastSession();
+        sendResponse(lastSession);
+        break;
+      case 'setRemoved':
+        await sessions.setRemoved(message.data.url, message.data.removed);
+        sendResponse();
+        break;
     }
   })();
   return true;

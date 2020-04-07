@@ -36,7 +36,7 @@ function addCreatedListener() {
     lastSession.tabs = [...map.values()];
     await sessions.setLastSession(lastSession);
     await tabs.setCachedTabs();
-    chrome.runtime.sendMessage({ code: 'setLastSession', data: lastSession });
+    chrome.runtime.sendMessage({ command: 'setLastSession', data: lastSession });
   });
 }
 

@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         await tabs.create({ url, active: false });
       }
     }
-    chrome.runtime.sendMessage({ code: 'setRemoved', data: { removed: true } });
+    chrome.runtime.sendMessage({ command: 'setRemoved', data: { removed: true } });
     await tabs.removeCurrent();
   });
 
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let lastSession = null;
   // 主动获取标签列表
-  chrome.runtime.sendMessage({ code: 'getLastSession' }, session => {
+  chrome.runtime.sendMessage({ command: 'getLastSession' }, session => {
     lastSession = lastSession || session;
     if (session.lastModified > lastSession.lastModified) {
       lastSession = session;
@@ -49,14 +49,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (chrome.runtime.id !== sender.id) {
       return sendResponse();
     }
-    if (message.code === 'setLastSession') {
-      const session = message.data;
-      lastSession = lastSession || session;
-      if (session.lastModified > lastSession.lastModified) {
-        lastSession = session;
-      }
-      refreshTabList(lastSession);
-      sendResponse();
+    switch (message.command) {
+      case 'setLastSession':
+        const session = message.data;
+        lastSession = lastSession || session;
+        if (session.lastModified > lastSession.lastModified) {
+          lastSession = session;
+        }
+        refreshTabList(lastSession);
+        sendResponse();
+        break;
     }
     return true;
   });
@@ -74,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const li = event.target.parentNode;
         li.className = li.className ? '' : 'removed';
         const url = li.dataset.tabUrl;
-        chrome.runtime.sendMessage({ code: 'setRemoved', data: { url } });
+        chrome.runtime.sendMessage({ command: 'setRemoved', data: { url } });
       });
       // 创建标签图标
       let icon;
@@ -83,10 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
         icon.className = 'icon';
         icon.src = item.favIconDateUrl;
       } else if (item.favIconUrl) {
-        icon = document.createElement('img');
+        icon = document.createElement('div');
         icon.className = 'icon';
-        icon.src = item.favIconUrl;
-        icon.crossOrigin = '';
+        icon.style.backgroundImage = `url('${item.favIconUrl}')`;
       } else {
         icon = document.createElement('i');
         icon.className = 'icon iconfont icon-file';
@@ -114,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
           li.className = 'removed';
           const url = li.dataset.tabUrl;
           await tabs.create({ url, active: false });
-          chrome.runtime.sendMessage({ code: 'setRemoved', data: { url, removed: true } });
+          chrome.runtime.sendMessage({ command: 'setRemoved', data: { url, removed: true } });
         }
         isMoved = false;
       });
