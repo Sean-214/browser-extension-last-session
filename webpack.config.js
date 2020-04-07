@@ -4,6 +4,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const GenerateJsonPlugin = require('generate-json-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { POPUP_PATH, OPTIONS_PATH } = require('./src/lib/constants');
+const { FUNC_TYPE_INFOS } = require('./src/lib/browser-action/func-type');
 const { version } = require('./package.json');
 const manifest = require('./src/manifest.json');
 
@@ -20,6 +21,10 @@ module.exports = (env, argv) => {
           useShortDoctype: true,
         }
       : false;
+  const commands = {};
+  for (const item of FUNC_TYPE_INFOS) {
+    commands[item.name] = item.commands;
+  }
   return {
     mode,
     entry: {
@@ -38,6 +43,7 @@ module.exports = (env, argv) => {
         ...manifest,
         version,
         options_ui: { page: OPTIONS_PATH },
+        commands,
       }),
       new HtmlWebpackPlugin({
         filename: POPUP_PATH,
