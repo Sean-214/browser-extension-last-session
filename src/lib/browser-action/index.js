@@ -1,30 +1,35 @@
+import camelCase from 'lodash/camelCase';
 import options from '../options';
 import base from './base';
+import { FUNC_TYPE_INFOS } from './func-type';
 
 // 自动导入模块
 const _funcTypeCache = new Map();
-const context = require.context('./func-type', false, /.+\.js$/);
+const context = require.context('./func-type', false, /^\.\/func-type-.+\.js$/);
 context.keys().forEach(fileName => {
-  let component = context(fileName);
-  component = component.default || component;
-  const funcTypeOption = { ...component };
-  _funcTypeCache.set(funcTypeOption.value, funcTypeOption);
+  const component = context(fileName);
+  const componentName = camelCase(fileName.replace(/^\.\/func-type-/, '').replace(/\.\w+$/, ''));
+  _funcTypeCache.set(`funcType_${componentName}`, component.default || component);
 });
 
 /**
  * 选择单击图标的功能列表
  */
-const FUNC_TYPE_LIST = [..._funcTypeCache.values()].sort((a, b) => {
-  if (a.order < b.order) {
-    return -1;
+export const FUNC_TYPE_LIST = [];
+for (const item of FUNC_TYPE_INFOS) {
+  const funcType = _funcTypeCache.get(item.name);
+  if (funcType) {
+    funcType.name = item.name;
+    funcType.value = item.name;
+    funcType.label = chrome.i18n.getMessage(item.name);
+    FUNC_TYPE_LIST.push(funcType);
   }
-  return 1;
-});
+}
 
 /**
  * 默认
  */
-const DEFAULT_FUNC_TYPE = FUNC_TYPE_LIST[0];
+export const DEFAULT_FUNC_TYPE = FUNC_TYPE_LIST[0];
 
 /**
  * 监听扩展程序按钮单击事件
@@ -34,7 +39,7 @@ function addClickedListener() {
     const funcType = await options.getFuncType(DEFAULT_FUNC_TYPE.value);
     const funcTypeOption = _funcTypeCache.get(funcType);
     if (funcTypeOption && typeof funcTypeOption.handle === 'function') {
-      funcTypeOption.handle(tab);
+      await funcTypeOption.handle(tab);
     }
   });
 }

@@ -4,8 +4,8 @@
   "openAll": { "message": "全部打开" },
   "viewHistory": { "message": "查看历史" },
   "funcTypeLabel": { "message": "选择单击图标的功能" },
-  "funcTypeLabel_1": { "message": "撤销" },
-  "funcTypeLabel_2": { "message": "在标签页中打开上次未关闭页面" },
-  "funcTypeLabel_3": { "message": "在弹出窗口中打开上次未关闭页面" },
+  "funcType_undo": { "message": "撤销" },
+  "funcType_openInTab": { "message": "在标签页中打开上次未关闭页面" },
+  "funcType_openInPopup": { "message": "在弹出窗口中打开上次未关闭页面" },
   "copyToClipboard": { "message": "复制到剪贴板" }
 }

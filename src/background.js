@@ -1,5 +1,6 @@
 import storage from './lib/storage';
 import browserAction from './lib/browser-action';
+import commands from './lib/commands';
 import sessions from './lib/sessions';
 import tabs from './lib/tabs';
 import windows from './lib/windows';
@@ -37,6 +38,9 @@ tabs.addUpdatedListener();
 
 // 监听扩展程序按钮单击事件
 browserAction.addClickedListener();
+
+// 监听快捷键激活命令事件
+commands.addCommandListener();
 
 (async () => {
   await browserAction.setFuncType();

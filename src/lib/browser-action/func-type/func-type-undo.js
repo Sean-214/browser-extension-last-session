@@ -2,11 +2,6 @@ import sessions from '../../sessions';
 import base from '../base';
 import { POPUP_PATH } from '../../constants';
 
-const name = 'funcTypeLabel_1';
-const label = chrome.i18n.getMessage(name);
-const value = name;
-const order = 1;
-
 async function install() {
   await base.setTitle({ title: chrome.i18n.getMessage(name) });
   await base.setPopup({ popup: '' });
@@ -23,10 +18,6 @@ async function handle() {
 }
 
 export default {
-  name,
-  label,
-  value,
-  order,
   install,
   handle,
 };
