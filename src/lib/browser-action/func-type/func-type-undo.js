@@ -2,6 +2,8 @@ import sessions from '../../sessions';
 import base from '../base';
 import { POPUP_PATH } from '../../constants';
 
+const name = 'funcType_undo';
+
 async function install() {
   await base.setTitle({ title: chrome.i18n.getMessage(name) });
   await base.setPopup({ popup: '' });

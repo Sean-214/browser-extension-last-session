@@ -23,7 +23,9 @@ module.exports = (env, argv) => {
       : false;
   const commands = {};
   for (const item of FUNC_TYPE_INFOS) {
-    commands[item.name] = item.commands;
+    if (item.commands) {
+      commands[item.name] = item.commands;
+    }
   }
   return {
     mode,

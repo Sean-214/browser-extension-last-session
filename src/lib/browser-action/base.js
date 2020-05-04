@@ -10,7 +10,14 @@ function setPopup(details) {
   });
 }
 
+function setIcon(details) {
+  return new Promise((resolve, reject) => {
+    chrome.browserAction.setIcon(details, resolve);
+  });
+}
+
 export default {
   setTitle,
   setPopup,
+  setIcon,
 };

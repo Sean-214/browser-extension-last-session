@@ -20,9 +20,6 @@ module.exports = {
     },
     {
       name: 'funcType_openInPopup',
-      commands: {
-        description: '__MSG_funcType_openInPopup__',
-      },
     },
   ],
 };

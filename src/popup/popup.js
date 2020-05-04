@@ -36,6 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   let lastSession = null;
+  // 主动获取主题
+  chrome.runtime.sendMessage({ command: 'getTheme' }, theme => {
+    document.body.className = theme;
+  });
   // 主动获取标签列表
   chrome.runtime.sendMessage({ command: 'getLastSession' }, session => {
     lastSession = lastSession || session;
@@ -44,12 +48,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     refreshTabList(lastSession);
   });
-  // 被动接收标签列表
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (chrome.runtime.id !== sender.id) {
       return sendResponse();
     }
     switch (message.command) {
+      // 被动接收主题
+      case 'setTheme':
+        const theme = message.data;
+        document.body.className = theme;
+        sendResponse();
+        break;
+      // 被动接收标签列表
       case 'setLastSession':
         const session = message.data;
         lastSession = lastSession || session;
@@ -93,31 +103,17 @@ document.addEventListener('DOMContentLoaded', () => {
         icon.className = 'icon iconfont icon-file';
       }
       // 创建标签标题
-      const title = document.createElement('span');
+      const title = document.createElement('a');
       title.className = 'title';
+      title.href = item.url;
       // 标签标题单击事件
-      let isMoved = false;
-      title.addEventListener('click', event => {
+      title.addEventListener('click', async event => {
         event.preventDefault();
-      });
-      title.addEventListener('mousedown', event => {
-        event.preventDefault();
-        isMoved = false;
-      });
-      title.addEventListener('mousemove', event => {
-        event.preventDefault();
-        isMoved = true;
-      });
-      title.addEventListener('mouseup', async event => {
-        event.preventDefault();
-        if (!isMoved && (event.button === 0 || event.button === 1)) {
-          const li = event.target.parentNode;
-          li.className = 'removed';
-          const url = li.dataset.tabUrl;
-          await tabs.create({ url, active: false });
-          chrome.runtime.sendMessage({ command: 'setRemoved', data: { url, removed: true } });
-        }
-        isMoved = false;
+        const li = event.target.parentNode;
+        li.className = 'removed';
+        const url = li.dataset.tabUrl;
+        await tabs.create({ url, active: false });
+        chrome.runtime.sendMessage({ command: 'setRemoved', data: { url, removed: true } });
       });
       const titleText = document.createTextNode(item.title);
       title.appendChild(titleText);

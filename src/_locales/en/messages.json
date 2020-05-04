@@ -3,9 +3,12 @@
   "description": { "message": "Show tabs that were not closed when the window was last closed" },
   "openAll": { "message": "Open all" },
   "viewHistory": { "message": "View History" },
+  "copyToClipboard": { "message": "Copy to clipboard" },
+  "themeLabel": { "message": "Theme" },
+  "theme_light": { "message": "Light" },
+  "theme_dark": { "message": "Dark" },
   "funcTypeLabel": { "message": "Select the function of click Icon" },
   "funcType_undo": { "message": "Undo" },
   "funcType_openInTab": { "message": "Open Last Session Page in Tab" },
-  "funcType_openInPopup": { "message": "Open Last Session Page in Popup" },
-  "copyToClipboard": { "message": "Copy to clipboard" }
+  "funcType_openInPopup": { "message": "Open Last Session Page in Popup" }
 }

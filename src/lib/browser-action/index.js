@@ -2,6 +2,7 @@ import camelCase from 'lodash/camelCase';
 import options from '../options';
 import base from './base';
 import { FUNC_TYPE_INFOS } from './func-type';
+import { THEME_LIST } from '../constants';
 
 // 自动导入模块
 const _funcTypeCache = new Map();
@@ -11,6 +12,11 @@ context.keys().forEach(fileName => {
   const componentName = camelCase(fileName.replace(/^\.\/func-type-/, '').replace(/\.\w+$/, ''));
   _funcTypeCache.set(`funcType_${componentName}`, component.default || component);
 });
+// 主题
+const _themeCache = new Map();
+for (const item of THEME_LIST) {
+  _themeCache.set(item.value, item);
+}
 
 /**
  * 选择单击图标的功能列表
@@ -59,13 +65,25 @@ async function setFuncType(type) {
   }
 }
 
-const { setTitle, setPopup } = base;
+/**
+ * 设置主题
+ * @param {string} theme 主题
+ */
+async function setTheme(theme) {
+  let _theme = theme;
+  if (theme == null) {
+    _theme = await options.getTheme();
+  }
+  const themeOption = _themeCache.get(_theme);
+  if (themeOption) {
+    await base.setIcon({ path: themeOption.icon });
+  }
+}
 
 export default {
   FUNC_TYPE_LIST,
   DEFAULT_FUNC_TYPE,
-  setTitle,
-  setPopup,
   addClickedListener,
   setFuncType,
+  setTheme,
 };

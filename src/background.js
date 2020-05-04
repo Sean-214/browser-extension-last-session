@@ -1,6 +1,7 @@
 import storage from './lib/storage';
 import browserAction from './lib/browser-action';
 import commands from './lib/commands';
+import options from './lib/options';
 import sessions from './lib/sessions';
 import tabs from './lib/tabs';
 import windows from './lib/windows';
@@ -17,6 +18,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       return sendResponse();
     }
     switch (message.command) {
+      case 'getTheme':
+        const theme = await options.getTheme();
+        sendResponse(theme);
+        break;
       case 'getLastSession':
         const lastSession = await sessions.getLastSession();
         sendResponse(lastSession);
@@ -43,5 +48,6 @@ browserAction.addClickedListener();
 commands.addCommandListener();
 
 (async () => {
+  await browserAction.setTheme();
   await browserAction.setFuncType();
 })();

@@ -3,9 +3,12 @@
   "description": { "message": "显示上次关闭窗口时未关闭的标签页" },
   "openAll": { "message": "全部打开" },
   "viewHistory": { "message": "查看历史" },
+  "copyToClipboard": { "message": "复制到剪贴板" },
+  "themeLabel": { "message": "主题" },
+  "theme_light": { "message": "浅色" },
+  "theme_dark": { "message": "深色" },
   "funcTypeLabel": { "message": "选择单击图标的功能" },
   "funcType_undo": { "message": "撤销" },
   "funcType_openInTab": { "message": "在标签页中打开上次未关闭页面" },
-  "funcType_openInPopup": { "message": "在弹出窗口中打开上次未关闭页面" },
-  "copyToClipboard": { "message": "复制到剪贴板" }
+  "funcType_openInPopup": { "message": "在弹出窗口中打开上次未关闭页面" }
 }

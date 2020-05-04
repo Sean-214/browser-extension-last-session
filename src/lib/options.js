@@ -1,6 +1,21 @@
 import storage from './storage';
+import { THEME_DEFAULT } from './constants';
 
 const OPTIONS = { options: {} };
+
+async function getTheme() {
+  const items = await storage.get(OPTIONS);
+  if (items.options.theme != null) {
+    return items.options.theme;
+  }
+  return THEME_DEFAULT.value;
+}
+
+async function setTheme(value) {
+  const items = await storage.get(OPTIONS);
+  items.options.theme = value;
+  await storage.set(items);
+}
 
 async function getFuncType(defaultValue) {
   const items = await storage.get(OPTIONS);
@@ -17,6 +32,8 @@ async function setFuncType(value) {
 }
 
 export default {
+  getTheme,
+  setTheme,
   getFuncType,
   setFuncType,
 };

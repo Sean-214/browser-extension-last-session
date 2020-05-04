@@ -30,7 +30,8 @@ li {
 }
 .header {
   padding: 0 20px;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
   height: 60px;
   .content {
     position: relative;
@@ -47,7 +48,6 @@ li {
       .btn {
         margin-left: 10px;
         font-size: 14px;
-        color: #0000ee;
         cursor: pointer;
       }
       .btn:hover {
@@ -76,13 +76,8 @@ li {
       height: 16px;
       line-height: 16px;
       font-size: 14px;
-      color: #999999;
       text-align: center;
       cursor: pointer;
-    }
-    .btn:hover {
-      color: #ffffff !important;
-      background-color: #ff0000;
     }
     // 标签图标
     .icon {
@@ -108,7 +103,6 @@ li {
       height: 16px;
       line-height: 16px;
       font-size: 14px;
-      color: #000000;
       text-decoration: none;
       overflow: hidden;
       white-space: nowrap;
@@ -116,16 +110,7 @@ li {
       cursor: pointer;
     }
     .title:hover {
-      color: #0066cc;
       text-decoration: underline;
-    }
-  }
-  // 标签鼠标悬停
-  li:hover {
-    background-color: #e7f5ff;
-    // 删除按钮
-    .btn {
-      color: #666666;
     }
   }
   // 标签删除状态
@@ -136,8 +121,114 @@ li {
     }
     // 标签标题
     .title {
-      color: #cccccc;
       text-decoration: line-through;
+      opacity: 0.4;
+    }
+  }
+}
+
+/* 浅色 */
+.light {
+  background-color: #ffffff;
+  .header {
+    border-bottom-color: #eeeeee;
+    .content {
+      #title {
+        color: #000000;
+      }
+      .right {
+        .btn {
+          color: #0000ee;
+        }
+        .btn:hover {
+          color: #0000ee;
+        }
+      }
+    }
+  }
+  // 标签列表
+  #tab-list {
+    li {
+      // 删除按钮
+      .btn {
+        color: #999999;
+      }
+      .btn:hover {
+        color: #ffffff !important;
+        background-color: #ff0000;
+      }
+      // 标签图标
+      .icon {
+        color: #000000;
+      }
+      // 标签标题
+      .title {
+        color: #000000;
+      }
+      .title:hover {
+        color: #0066cc;
+      }
+    }
+    // 标签鼠标悬停
+    li:hover {
+      background-color: #e7f5ff;
+      // 删除按钮
+      .btn {
+        color: #666666;
+      }
+    }
+  }
+}
+
+/* 深色 */
+.dark {
+  background-color: #181a1b;
+  .header {
+    border-bottom-color: #575757;
+    .content {
+      #title {
+        color: #cbc7bf;
+      }
+      .right {
+        .btn {
+          color: #76aad4;
+        }
+        .btn:hover {
+          color: #76aad4;
+        }
+      }
+    }
+  }
+  // 标签列表
+  #tab-list {
+    li {
+      // 删除按钮
+      .btn {
+        color: #bdb8af;
+      }
+      .btn:hover {
+        color: #ffffff !important;
+        background-color: #ff0000;
+      }
+      // 标签图标
+      .icon {
+        color: #bdb8af;
+      }
+      // 标签标题
+      .title {
+        color: #bdb8af;
+      }
+      .title:hover {
+        color: #76aad4;
+      }
+    }
+    // 标签鼠标悬停
+    li:hover {
+      background-color: #2c2e2f;
+      // 删除按钮
+      .btn {
+        color: #bdb8af;
+      }
     }
   }
 }

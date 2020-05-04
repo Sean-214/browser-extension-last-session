@@ -8,11 +8,11 @@
   "homepage_url": "https://github.com/Sean-214/browser-extension-last-session",
   "default_locale": "zh_CN",
   "icons": {
-    "16": "assets/icons/icon-16.png",
-    "32": "assets/icons/icon-32.png",
-    "48": "assets/icons/icon-48.png",
-    "64": "assets/icons/icon-64.png",
-    "128": "assets/icons/icon-128.png"
+    "16": "assets/icons/light/icon-16.png",
+    "32": "assets/icons/light/icon-32.png",
+    "48": "assets/icons/light/icon-48.png",
+    "64": "assets/icons/light/icon-64.png",
+    "128": "assets/icons/light/icon-128.png"
   },
   "browser_action": {
     "default_title": "__MSG_title__"
