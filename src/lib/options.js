@@ -15,6 +15,7 @@ async function setTheme(value) {
   const items = await storage.get(OPTIONS);
   items.options.theme = value;
   await storage.set(items);
+  chrome.runtime.sendMessage({ command: 'setTheme', data: value });
 }
 
 async function getFuncType(defaultValue) {
