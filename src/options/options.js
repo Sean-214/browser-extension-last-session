@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const MSG_COPY_TO_CLIPBOARD = chrome.i18n.getMessage('copyToClipboard');
   const MSG_THEME_LABEL = chrome.i18n.getMessage('themeLabel');
   const MSG_FUNC_TYPE_LABEL = chrome.i18n.getMessage('funcTypeLabel');
+  const MSG_CLEAR_DATA = chrome.i18n.getMessage('clearData');
 
   document.getElementById('urlLabel').textContent = MSG_TITLE;
   document.getElementById('themeLabel').textContent = MSG_THEME_LABEL;
@@ -51,5 +52,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   funcType.addEventListener('change', async event => {
     await browserAction.setFuncType(event.target.value);
     await options.setFuncType(event.target.value);
+  });
+  // 清除数据
+  const clearData = document.getElementById('clearData');
+  clearData.textContent = MSG_CLEAR_DATA;
+  clearData.addEventListener('click', async event => {
+    await options.clear();
   });
 });

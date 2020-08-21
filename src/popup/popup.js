@@ -49,9 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
     refreshTabList(lastSession);
   });
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (chrome.runtime.id !== sender.id) {
-      return sendResponse();
-    }
     switch (message.command) {
       // 被动接收主题
       case 'setTheme':
@@ -67,6 +64,12 @@ document.addEventListener('DOMContentLoaded', () => {
           lastSession = session;
         }
         refreshTabList(lastSession);
+        sendResponse();
+        break;
+      // 监听清除数据
+      case 'clearStorage':
+        const ul = document.getElementById('tab-list');
+        util.emptyElement(ul);
         sendResponse();
         break;
     }
@@ -91,9 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
       // 创建标签图标
       let icon;
       if (item.favIconDateUrl) {
-        icon = document.createElement('img');
+        icon = document.createElement('div');
         icon.className = 'icon';
-        icon.src = item.favIconDateUrl;
+        icon.style.backgroundImage = `url('${item.favIconDateUrl}')`;
       } else if (item.favIconUrl) {
         icon = document.createElement('div');
         icon.className = 'icon';

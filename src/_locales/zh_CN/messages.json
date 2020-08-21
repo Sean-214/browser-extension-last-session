@@ -10,5 +10,6 @@
   "funcTypeLabel": { "message": "选择单击图标的功能" },
   "funcType_undo": { "message": "撤销" },
   "funcType_openInTab": { "message": "在标签页中打开上次未关闭页面" },
-  "funcType_openInPopup": { "message": "在弹出窗口中打开上次未关闭页面" }
+  "funcType_openInPopup": { "message": "在弹出窗口中打开上次未关闭页面" },
+  "clearData": { "message": "清除数据" }
 }

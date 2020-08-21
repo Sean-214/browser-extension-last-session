@@ -10,5 +10,6 @@
   "funcTypeLabel": { "message": "Select the function of click Icon" },
   "funcType_undo": { "message": "Undo" },
   "funcType_openInTab": { "message": "Open Last Session Page in Tab" },
-  "funcType_openInPopup": { "message": "Open Last Session Page in Popup" }
+  "funcType_openInPopup": { "message": "Open Last Session Page in Popup" },
+  "clearData": { "message": "Clear Data" }
 }

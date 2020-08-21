@@ -31,9 +31,15 @@ async function setFuncType(value) {
   await storage.set(items);
 }
 
+async function clear() {
+  await storage.clear();
+  chrome.runtime.sendMessage({ command: 'clearStorage' });
+}
+
 export default {
   getTheme,
   setTheme,
   getFuncType,
   setFuncType,
+  clear,
 };

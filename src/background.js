@@ -1,15 +1,9 @@
-import storage from './lib/storage';
 import browserAction from './lib/browser-action';
 import commands from './lib/commands';
 import options from './lib/options';
 import sessions from './lib/sessions';
 import tabs from './lib/tabs';
 import windows from './lib/windows';
-
-// 初始化
-chrome.runtime.onInstalled.addListener(async () => {
-  await storage.clear();
-});
 
 // 监听消息
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
