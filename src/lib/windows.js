@@ -1,6 +1,6 @@
 import sessions from './sessions';
 import tabs from './tabs';
-import { POPUP_PATH } from './constants';
+import util from './util';
 
 /**
  * 获取最近关闭的标签页和/或窗口的列表
@@ -11,7 +11,6 @@ function addCreatedListener() {
     const lastSession = await sessions.getLastSession();
     const cachedTabs = await tabs.getCachedTabs();
     const recentlyClosedSessions = await sessions.getRecentlyClosed();
-    const url = chrome.runtime.getURL(POPUP_PATH);
     const map = new Map();
     for (const item of lastSession.tabs) {
       map.set(item.url, item);
@@ -26,7 +25,7 @@ function addCreatedListener() {
           cachedTabMap.set(item.url, item);
         }
         for (const item of tabList) {
-          if (item.url !== url) {
+          if (!util.isInnerUrl(item.url)) {
             const cachedTab = cachedTabMap.get(item.url) || {};
             map.set(item.url, tabs.newTab({ ...item, ...cachedTab }));
           }

@@ -1,0 +1,192 @@
+html,
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  display: flex;
+  flex-direction: column;
+  min-width: 280px;
+  min-height: 471px;
+  height: 100%;
+  overflow: hidden;
+}
+ul,
+li {
+  list-style: none;
+}
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-corner {
+  background: none;
+}
+::-webkit-scrollbar-track {
+  opacity: 0;
+}
+
+/* 布局 */
+.header {
+  padding: 0 10px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  height: 36px;
+  line-height: 36px;
+  #title {
+    font-size: 14px;
+    font-weight: bold;
+  }
+}
+.main {
+  flex: 1;
+  overflow: auto;
+}
+.footer {
+  .btn {
+    padding-left: 38px;
+    padding-right: 10px;
+    border-top-width: 1px;
+    border-top-style: solid;
+    height: 36px;
+    line-height: 36px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+}
+
+/* 最近关闭列表 */
+#recent-list {
+  li {
+    position: relative;
+    height: 30px;
+    cursor: pointer;
+    // 最近关闭图标
+    .icon {
+      position: absolute;
+      top: 6px;
+      left: 10px;
+      display: block;
+      width: 18px;
+      height: 18px;
+      background-size: 18px 18px;
+    }
+    .icon.iconfont {
+      line-height: 18px;
+      font-size: 18px;
+    }
+    // 最近关闭标题
+    .title {
+      position: absolute;
+      top: 7px;
+      left: 38px;
+      right: 10px;
+      display: block;
+      height: 16px;
+      line-height: 16px;
+      font-size: 14px;
+      text-decoration: none;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+  li:hover {
+    .title {
+      text-decoration: underline;
+    }
+  }
+}
+
+/* 浅色 */
+.light {
+  background-color: #ffffff;
+  ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: #8d8d8d;
+  }
+  .header {
+    border-bottom-color: #eeeeee;
+    #title {
+      color: #000000;
+    }
+  }
+  // 最近关闭列表
+  #recent-list {
+    li {
+      // 最近关闭图标
+      .icon {
+        color: #000000;
+      }
+      // 最近关闭标题
+      .title {
+        color: #000000;
+      }
+    }
+    // 最近关闭鼠标悬停
+    li:hover {
+      background-color: #e7f5ff;
+      .title {
+        color: #0066cc;
+      }
+    }
+  }
+  .footer {
+    .btn {
+      border-top-color: #eeeeee;
+      color: #000000;
+    }
+  }
+}
+
+/* 深色 */
+.dark {
+  background-color: #181a1b;
+  ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: #7d7d7d;
+  }
+  .header {
+    border-bottom-color: #575757;
+    #title {
+      color: #cbc7bf;
+    }
+  }
+  // 最近关闭列表
+  #recent-list {
+    li {
+      // 最近关闭图标
+      .icon {
+        color: #bdb8af;
+      }
+      // 最近关闭标题
+      .title {
+        color: #bdb8af;
+      }
+    }
+    // 最近关闭鼠标悬停
+    li:hover {
+      background-color: #2c2e2f;
+      .title {
+        color: #76aad4;
+      }
+    }
+  }
+  .footer {
+    .btn {
+      border-top-color: #575757;
+      color: #cbc7bf;
+    }
+  }
+}

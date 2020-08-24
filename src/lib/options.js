@@ -32,6 +32,20 @@ async function setFuncType(value) {
   await storage.set(items);
 }
 
+async function getRecentSize(defaultValue) {
+  const items = await storage.get(OPTIONS);
+  if (items.options.recentSize != null) {
+    return items.options.recentSize;
+  }
+  return defaultValue;
+}
+
+async function setRecentSize(value) {
+  const items = await storage.get(OPTIONS);
+  items.options.recentSize = value;
+  await storage.set(items);
+}
+
 async function clear() {
   await storage.clear();
   chrome.runtime.sendMessage({ command: 'clearStorage' });
@@ -42,5 +56,7 @@ export default {
   setTheme,
   getFuncType,
   setFuncType,
+  getRecentSize,
+  setRecentSize,
   clear,
 };

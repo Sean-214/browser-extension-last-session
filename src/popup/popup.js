@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const url = li.dataset.tabUrl;
         chrome.runtime.sendMessage({ command: 'setRemoved', data: { url } });
       });
-      // 创建标签图标
+      // 创建图标
       let icon;
       if (item.favIconDateUrl) {
         icon = document.createElement('div');
@@ -105,11 +105,11 @@ document.addEventListener('DOMContentLoaded', () => {
         icon = document.createElement('i');
         icon.className = 'icon iconfont icon-file';
       }
-      // 创建标签标题
+      // 创建标题
       const title = document.createElement('a');
       title.className = 'title';
       title.href = item.url;
-      // 标签标题单击事件
+      // 标题单击事件
       title.addEventListener('click', async event => {
         event.preventDefault();
         const li = event.target.parentNode;
@@ -119,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         chrome.runtime.sendMessage({ command: 'setRemoved', data: { url, removed: true } });
       });
       const titleText = document.createTextNode(item.title);
+      title.title = titleText;
       title.appendChild(titleText);
       // 创建列表项
       const li = document.createElement('li');

@@ -3,7 +3,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const GenerateJsonPlugin = require('generate-json-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { POPUP_PATH, OPTIONS_PATH } = require('./src/lib/constants');
+const { POPUP_PATH, RECENT_PATH, OPTIONS_PATH } = require('./src/lib/constants');
 const { FUNC_TYPE_INFOS } = require('./src/lib/browser-action/func-type');
 const { version } = require('./package.json');
 const manifest = require('./src/manifest.json');
@@ -32,6 +32,7 @@ module.exports = (env, argv) => {
     entry: {
       background: './src/background.js',
       popup: './src/popup/popup.js',
+      recent: './src/popup/recent.js',
       options: './src/options/options.js',
     },
     output: {
@@ -51,6 +52,12 @@ module.exports = (env, argv) => {
         filename: POPUP_PATH,
         template: 'src/popup/popup.html',
         chunks: ['popup'],
+        minify,
+      }),
+      new HtmlWebpackPlugin({
+        filename: RECENT_PATH,
+        template: 'src/popup/recent.html',
+        chunks: ['recent'],
         minify,
       }),
       new HtmlWebpackPlugin({

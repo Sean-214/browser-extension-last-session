@@ -4,6 +4,10 @@ function emptyElement(el) {
   }
 }
 
+function isInnerUrl(url) {
+  return url && url.startsWith(chrome.runtime.getURL(''));
+}
+
 function getBase64ByUrl(url, width, height) {
   return new Promise((resolve, reject) => {
     const img = document.createElement('img');
@@ -26,5 +30,6 @@ function _imgToDataURL(img, width, height) {
 
 export default {
   emptyElement,
+  isInnerUrl,
   getBase64ByUrl,
 };

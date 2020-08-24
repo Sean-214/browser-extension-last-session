@@ -23,6 +23,7 @@ const THEME_DARK = {
 
 module.exports = {
   POPUP_PATH: 'popup.html',
+  RECENT_PATH: 'recent.html',
   OPTIONS_PATH: 'options.html',
   THEME_DEFAULT: THEME_LIGHT,
   THEME_LIST: [THEME_LIGHT, THEME_DARK],

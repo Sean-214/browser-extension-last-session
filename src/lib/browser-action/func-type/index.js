@@ -10,6 +10,9 @@ module.exports = {
       },
     },
     {
+      name: 'funcType_recent',
+    },
+    {
       name: 'funcType_openInTab',
       commands: {
         suggested_key: {

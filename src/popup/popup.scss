@@ -21,6 +21,22 @@ ul,
 li {
   list-style: none;
 }
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-corner {
+  background-color: #f6f6f6;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: #cdcdcd;
+}
+::-webkit-scrollbar-track {
+  border-radius: 2px;
+  background-color: #f6f6f6;
+}
 
 /* 布局 */
 .content {

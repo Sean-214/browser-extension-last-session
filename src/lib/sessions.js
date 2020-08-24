@@ -1,4 +1,5 @@
 import storage from './storage';
+import util from './util';
 import { POPUP_PATH } from './constants';
 
 const LAST_SESSION = { lastSession: { lastModified: 0, tabs: [] } };
@@ -24,8 +25,7 @@ function restore(sessionId = null) {
 async function getLastSession(filter) {
   let _filter = filter;
   if (!_filter) {
-    const url = chrome.runtime.getURL(POPUP_PATH);
-    _filter = item => item.url !== url && !item.removed;
+    _filter = item => !util.isInnerUrl(item.url) && !item.removed;
   }
   const items = await storage.get(LAST_SESSION);
   items.lastSession.tabs = items.lastSession.tabs.filter(_filter);
@@ -47,10 +47,25 @@ async function setRemoved(url, removed) {
   await setLastSession(lastSession);
 }
 
+async function getRecents(filter = null) {
+  const tabs = [];
+  const sessionList = await getRecentlyClosed();
+  for (const session of sessionList) {
+    if (session && session.tab && session.tab.sessionId != null && !util.isInnerUrl(session.tab.url)) {
+      tabs.push(session.tab);
+    }
+  }
+  if (filter && filter.maxResults) {
+    return tabs.slice(0, filter.maxResults);
+  }
+  return tabs;
+}
+
 export default {
   getRecentlyClosed,
   restore,
   getLastSession,
   setLastSession,
   setRemoved,
+  getRecents,
 };

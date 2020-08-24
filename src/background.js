@@ -8,9 +8,6 @@ import windows from './lib/windows';
 // 监听消息
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   (async () => {
-    if (chrome.runtime.id !== sender.id) {
-      return sendResponse();
-    }
     switch (message.command) {
       case 'getTheme':
         const theme = await options.getTheme();
@@ -19,6 +16,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       case 'getLastSession':
         const lastSession = await sessions.getLastSession();
         sendResponse(lastSession);
+        break;
+      case 'getRecents':
+        const maxResults = await options.getRecentSize(browserAction.DEFAULT_RECENT_SIZE);
+        const recents = await sessions.getRecents({ maxResults });
+        sendResponse(recents);
         break;
       case 'setRemoved':
         await sessions.setRemoved(message.data.url, message.data.removed);

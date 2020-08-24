@@ -1,6 +1,6 @@
 import sessions from '../../sessions';
 import base from '../base';
-import { POPUP_PATH } from '../../constants';
+import util from '../../util';
 
 const name = 'funcType_undo';
 
@@ -10,10 +10,9 @@ async function install() {
 }
 
 async function handle() {
-  const url = chrome.runtime.getURL(POPUP_PATH);
   const sessionList = await sessions.getRecentlyClosed();
   for (const session of sessionList) {
-    if (session && session.tab && session.tab.sessionId != null && session.tab.url !== url) {
+    if (session && session.tab && session.tab.sessionId != null && !util.isInnerUrl(session.tab.url)) {
       return sessions.restore(session.tab.sessionId);
     }
   }

@@ -37,6 +37,21 @@ function create(createProperties = {}) {
 }
 
 /**
+ * 激活标签页，如果不存在则创建
+ */
+async function active(url) {
+  if (!url) {
+    return;
+  }
+  const tabList = await query({ windowId: chrome.windows.WINDOW_ID_CURRENT, url });
+  if (tabList && tabList.length) {
+    await update(tabList[0].id, { active: true });
+    return;
+  }
+  await create({ url });
+}
+
+/**
  * 修改标签页
  */
 function update(tabId = null, updateProperties = {}) {
@@ -110,6 +125,7 @@ export default {
   getCurrent,
   query,
   create,
+  active,
   update,
   remove,
   removeCurrent,

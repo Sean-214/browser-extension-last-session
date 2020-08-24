@@ -10,17 +10,7 @@ async function install() {
 }
 
 async function handle(tab) {
-  const windowId = tab ? tab.windowId : null;
-  const url = chrome.runtime.getURL(POPUP_PATH);
-  const tabList = await tabs.query({ windowId });
-  if (tabList && tabList.length) {
-    const tabItem = tabList.find(item => item.url && item.url.startsWith(url));
-    if (tabItem) {
-      await tabs.update(tabItem.id, { active: true });
-      return;
-    }
-  }
-  await tabs.create({ url });
+  await tabs.active(chrome.runtime.getURL(POPUP_PATH));
 }
 
 export default {

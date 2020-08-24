@@ -3,6 +3,12 @@ body {
   margin: 0;
   padding: 0;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
 
 .form {
   padding: 10px 20px;
@@ -16,19 +22,19 @@ body {
       font-weight: 600;
       font-size: 14px;
       line-height: 20px;
-      color: #262626;
-    }
-    label {
-      .form-item-label,
-      .form-item-content,
-      select {
-        cursor: pointer;
-      }
     }
     .form-item-content {
       padding: 0 10px;
+      cursor: pointer;
+      select,
+      input {
+        padding: 0 10px;
+        height: 32px;
+      }
     }
     button {
+      padding: 0 10px;
+      height: 32px;
       cursor: pointer;
     }
   }
@@ -37,6 +43,49 @@ body {
   }
 }
 
+/* 浅色 */
+.light {
+  background-color: #fff;
+  .form-item {
+    .form-item-label {
+      color: #2b2b2b;
+    }
+    .form-item-content {
+      color: #2b2b2b;
+    }
+  }
+}
+
+/* 深色 */
+.dark {
+  background-color: #3b3b3b;
+  .form-item {
+    .form-item-label {
+      color: #fff;
+    }
+    .form-item-content {
+      color: #fff;
+      select,
+      input {
+        background-color: #3b3b3b;
+        color: #fff;
+        border: 1px solid #7B7B7B;
+      }
+    }
+    button {
+      background-color: #4d4d4d;
+      color: #fff;
+      border: 2px solid transparent;
+    }
+  }
+}
+
 #url {
   word-break: break-all;
+}
+
+#recentSize {
+  box-sizing: border-box;
+  border-width: 1px;
+  width: 71px;
 }

@@ -33,9 +33,14 @@ for (const item of FUNC_TYPE_INFOS) {
 }
 
 /**
- * 默认
+ * 默认单击图标的功能
  */
 export const DEFAULT_FUNC_TYPE = FUNC_TYPE_LIST[0];
+
+/**
+ * 默认最近关闭列表大小
+ */
+export const DEFAULT_RECENT_SIZE = 20;
 
 /**
  * 监听扩展程序按钮单击事件
@@ -83,6 +88,7 @@ async function setTheme(theme) {
 export default {
   FUNC_TYPE_LIST,
   DEFAULT_FUNC_TYPE,
+  DEFAULT_RECENT_SIZE,
   addClickedListener,
   setFuncType,
   setTheme,

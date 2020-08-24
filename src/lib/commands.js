@@ -1,5 +1,11 @@
 import { FUNC_TYPE_LIST } from './browser-action';
 
+function getAll() {
+  return new Promise((resolve, reject) => {
+    chrome.commands.getAll(resolve);
+  });
+}
+
 /**
  * 监听快捷键激活命令事件
  */
@@ -13,5 +19,6 @@ function addCommandListener() {
 }
 
 export default {
+  getAll,
   addCommandListener,
 };
