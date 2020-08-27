@@ -1,6 +1,5 @@
 import storage from './storage';
 import util from './util';
-import { POPUP_PATH } from './constants';
 
 const LAST_SESSION = { lastSession: { lastModified: 0, tabs: [] } };
 

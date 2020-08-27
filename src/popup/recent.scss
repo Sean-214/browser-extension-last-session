@@ -17,7 +17,7 @@ body {
   display: flex;
   flex-direction: column;
   min-width: 280px;
-  min-height: 471px;
+  min-height: 501px;
   height: 100%;
   overflow: hidden;
 }
@@ -39,6 +39,7 @@ li {
 
 /* 布局 */
 .header {
+  margin-bottom: 5px;
   padding: 0 10px;
   border-bottom-width: 1px;
   border-bottom-style: solid;
@@ -54,16 +55,26 @@ li {
   overflow: auto;
 }
 .footer {
+  margin-top: 5px;
+  padding: 5px 0;
+  border-top-width: 1px;
+  border-top-style: solid;
   .btn {
     padding-left: 38px;
     padding-right: 10px;
-    border-top-width: 1px;
-    border-top-style: solid;
     height: 36px;
     line-height: 36px;
     font-size: 14px;
     cursor: pointer;
   }
+}
+.divider {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-top-width: 1px;
+  border-top-style: solid;
+  width: 100%;
+  height: 0;
 }
 
 /* 最近关闭列表 */
@@ -143,10 +154,16 @@ li {
     }
   }
   .footer {
+    border-top-color: #eeeeee;
     .btn {
-      border-top-color: #eeeeee;
       color: #000000;
     }
+    .btn:hover {
+      background-color: #eeeeee;
+    }
+  }
+  .divider {
+    border-top-color: #eeeeee;
   }
 }
 
@@ -184,9 +201,15 @@ li {
     }
   }
   .footer {
+    border-top-color: #575757;
     .btn {
-      border-top-color: #575757;
       color: #cbc7bf;
     }
+    .btn:hover {
+      background-color: #2c2e2f;
+    }
+  }
+  .divider {
+    border-top-color: #575757;
   }
 }
