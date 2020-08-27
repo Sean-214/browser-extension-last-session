@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const title = document.createElement('span');
       title.className = 'title';
       const titleText = document.createTextNode(item.title);
-      title.title = titleText;
+      title.title = item.title;
       title.appendChild(titleText);
       // 创建列表项
       const li = document.createElement('li');
