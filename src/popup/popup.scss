@@ -27,15 +27,13 @@ li {
   height: 8px;
 }
 ::-webkit-scrollbar-corner {
-  background-color: #f6f6f6;
+  background: none;
 }
 ::-webkit-scrollbar-thumb {
-  border-radius: 2px;
-  background-color: #cdcdcd;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-track {
-  border-radius: 2px;
-  background-color: #f6f6f6;
+  opacity: 0;
 }
 
 /* 布局 */
@@ -146,6 +144,12 @@ li {
 /* 浅色 */
 .light {
   background-color: #ffffff;
+  ::-webkit-scrollbar-thumb {
+    background: #8d8d8d;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a7a7a7;
+  }
   .header {
     border-bottom-color: #eeeeee;
     .content {
@@ -199,6 +203,12 @@ li {
 /* 深色 */
 .dark {
   background-color: #181a1b;
+  ::-webkit-scrollbar-thumb {
+    background: #7d7d7d;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #979797;
+  }
   .header {
     border-bottom-color: #575757;
     .content {
