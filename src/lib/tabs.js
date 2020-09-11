@@ -2,6 +2,7 @@ import storage from './storage';
 import util from './util';
 
 const CACHED_TABS = { cachedTabs: [] };
+const EXPIRES = 7 * 24 * 60 * 60 * 1000;
 
 /**
  * 获取当前标签页
@@ -88,15 +89,21 @@ function addUpdatedListener() {
   chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     if (changeInfo.url || changeInfo.title || changeInfo.favIconUrl) {
       let cachedTabs = await getCachedTabs();
-      const map = new Map();
+      const cachedTabMap = new Map();
       for (const item of cachedTabs) {
-        map.set(item.url, item);
+        cachedTabMap.set(item.url, item);
       }
+      const now = Date.now();
       if (tab.favIconUrl) {
-        tab.favIconDateUrl = await util.getBase64ByUrl(tab.favIconUrl);
+        const favIconDateUrl = await util.getBase64ByUrl(tab.favIconUrl);
+        cachedTabMap.set(tab.url, { ...newTab(tab), ...{ favIconDateUrl, expires: now } });
       }
-      map.set(tab.url, newTab(tab));
-      cachedTabs = [...map.values()];
+      cachedTabs = [];
+      for (const item of cachedTabMap.values()) {
+        if (now - item.expires < EXPIRES) {
+          cachedTabs.push(item);
+        }
+      }
       await setCachedTabs(cachedTabs);
     }
   });

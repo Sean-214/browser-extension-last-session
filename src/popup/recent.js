@@ -56,7 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
     for (const item of recents) {
       // 创建图标
       let icon;
-      if (item.favIconUrl) {
+      if (item.favIconDateUrl) {
+        icon = document.createElement('div');
+        icon.className = 'icon';
+        icon.style.backgroundImage = `url('${item.favIconDateUrl}')`;
+      } else if (item.favIconUrl) {
         icon = document.createElement('div');
         icon.className = 'icon';
         icon.style.backgroundImage = `url('${item.favIconUrl}')`;

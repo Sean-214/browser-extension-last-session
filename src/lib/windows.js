@@ -9,7 +9,6 @@ import util from './util';
 function addCreatedListener() {
   chrome.windows.onCreated.addListener(async window => {
     const lastSession = await sessions.getLastSession();
-    const cachedTabs = await tabs.getCachedTabs();
     const recentlyClosedSessions = await sessions.getRecentlyClosed();
     const map = new Map();
     for (const item of lastSession.tabs) {
@@ -20,6 +19,7 @@ function addCreatedListener() {
       lastSession.lastModified = session.lastModified;
       const tabList = session.tab ? [session.tab] : session.window.tabs;
       if (tabList && tabList.length) {
+        const cachedTabs = await tabs.getCachedTabs();
         const cachedTabMap = new Map();
         for (const item of cachedTabs) {
           cachedTabMap.set(item.url, item);
@@ -34,7 +34,6 @@ function addCreatedListener() {
     }
     lastSession.tabs = [...map.values()];
     await sessions.setLastSession(lastSession);
-    await tabs.setCachedTabs();
     chrome.runtime.sendMessage({ command: 'setLastSession', data: lastSession });
   });
 }
