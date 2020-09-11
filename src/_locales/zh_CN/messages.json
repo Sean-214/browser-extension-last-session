@@ -2,6 +2,7 @@
   "title": { "message": "上次未关闭页面" },
   "title_recent": { "message": "最近关闭的页面" },
   "description": { "message": "显示上次关闭窗口时未关闭的标签页" },
+  "removeAll": { "message": "全部删除" },
   "openAll": { "message": "全部打开" },
   "viewHistory": { "message": "查看历史" },
   "history": { "message": "历史" },

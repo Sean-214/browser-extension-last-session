@@ -8,10 +8,29 @@ document.addEventListener('DOMContentLoaded', () => {
   // 国际化
   const MSG_TITLE = chrome.i18n.getMessage('title');
   const MSG_VIEW_HISTORY = chrome.i18n.getMessage('viewHistory');
+  const MSG_REMOVE_ALL = chrome.i18n.getMessage('removeAll');
   const MSG_OPEN_ALL = chrome.i18n.getMessage('openAll');
 
   document.title = MSG_TITLE;
   document.getElementById('title').textContent = MSG_TITLE;
+
+  // 全部删除按钮单击事件
+  const removeAll = document.getElementById('remove-all');
+  removeAll.textContent = MSG_REMOVE_ALL;
+  removeAll.addEventListener('click', () => {
+    const ul = document.getElementById('tab-list');
+    let removed = false;
+    for (const li of ul.children) {
+      if (!li.className) {
+        removed = true;
+        break;
+      }
+    }
+    for (const li of ul.children) {
+      li.className = removed ? 'removed' : '';
+    }
+    chrome.runtime.sendMessage({ command: 'setRemoved', data: { removed } });
+  });
 
   // 打开全部按钮单击事件
   const openAll = document.getElementById('open-all');

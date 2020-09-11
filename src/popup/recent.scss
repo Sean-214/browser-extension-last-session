@@ -42,7 +42,6 @@ li {
 
 /* 布局 */
 .header {
-  margin-bottom: 5px;
   padding: 0 10px;
   border-bottom-width: 1px;
   border-bottom-style: solid;
@@ -56,9 +55,9 @@ li {
 .main {
   flex: 1;
   overflow: auto;
+  padding: 5px 0;
 }
 .footer {
-  margin-top: 5px;
   padding: 5px 0;
   border-top-width: 1px;
   border-top-style: solid;
