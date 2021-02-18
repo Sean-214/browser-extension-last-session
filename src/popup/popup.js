@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
         chrome.runtime.sendMessage({ command: 'setRemoved', data: { url, removed: true } });
       });
       const titleText = document.createTextNode(item.title);
-      title.title = titleText;
+      title.title = item.title;
       title.appendChild(titleText);
       // 创建列表项
       const li = document.createElement('li');
