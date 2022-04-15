@@ -13,6 +13,8 @@ module.exports = {
   quoteProps: 'as-needed',
   // 在ES5中有效的尾随逗号
   trailingComma: 'es5',
+  // 在箭头函数唯一的参数周围包含括号
+  arrowParens: 'always',
   // 使用默认的折行标准
   proseWrap: 'preserve',
   // 换行符使用 lf
