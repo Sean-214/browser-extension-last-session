@@ -1,16 +1,15 @@
-import camelCase from 'lodash/camelCase';
 import options from '../options';
-import base from './base';
+import api from './api';
 import { FUNC_TYPE_INFOS } from './func-type';
 import { THEME_LIST } from '../constants';
 
 // 自动导入模块
 const _funcTypeCache = new Map();
 const context = require.context('./func-type', false, /^\.\/func-type-.+\.js$/);
-context.keys().forEach(fileName => {
-  const component = context(fileName);
-  const componentName = camelCase(fileName.replace(/^\.\/func-type-/, '').replace(/\.\w+$/, ''));
-  _funcTypeCache.set(`funcType_${componentName}`, component.default || component);
+context.keys().forEach((fileName) => {
+  let component = context(fileName);
+  component = component.default || component;
+  _funcTypeCache.set(component.name, component);
 });
 // 主题
 const _themeCache = new Map();
@@ -25,10 +24,9 @@ export const FUNC_TYPE_LIST = [];
 for (const item of FUNC_TYPE_INFOS) {
   const funcType = _funcTypeCache.get(item.name);
   if (funcType) {
-    funcType.name = item.name;
-    funcType.value = item.name;
-    funcType.label = chrome.i18n.getMessage(item.name);
-    FUNC_TYPE_LIST.push(funcType);
+    const value = item.name;
+    const label = chrome.i18n.getMessage(item.name);
+    FUNC_TYPE_LIST.push({ value, label });
   }
 }
 
@@ -46,7 +44,7 @@ export const DEFAULT_RECENT_SIZE = 20;
  * 监听扩展程序按钮单击事件
  */
 function addClickedListener() {
-  chrome.browserAction.onClicked.addListener(async tab => {
+  api.addClickedListener(async (tab) => {
     const funcType = await options.getFuncType(DEFAULT_FUNC_TYPE.value);
     const funcTypeOption = _funcTypeCache.get(funcType);
     if (funcTypeOption && typeof funcTypeOption.handle === 'function') {
@@ -57,14 +55,14 @@ function addClickedListener() {
 
 /**
  * 设置单击扩展程序按钮的功能
- * @param {string} type 功能类型
+ * @param {Object} funcType 功能类型
  */
-async function setFuncType(type) {
-  let _type = type;
-  if (type == null) {
-    _type = await options.getFuncType(DEFAULT_FUNC_TYPE.value);
+async function setFuncType(funcType) {
+  let _funcType = funcType;
+  if (funcType == null) {
+    _funcType = await options.getFuncType(DEFAULT_FUNC_TYPE.value);
   }
-  const funcTypeOption = _funcTypeCache.get(_type);
+  const funcTypeOption = _funcTypeCache.get(_funcType);
   if (funcTypeOption && typeof funcTypeOption.install === 'function') {
     await funcTypeOption.install();
   }
@@ -81,7 +79,7 @@ async function setTheme(theme) {
   }
   const themeOption = _themeCache.get(_theme);
   if (themeOption) {
-    await base.setIcon({ path: themeOption.icon });
+    await api.setIcon({ path: themeOption.icon });
   }
 }
 

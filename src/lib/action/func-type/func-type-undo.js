@@ -1,12 +1,12 @@
 import sessions from '../../sessions';
-import base from '../base';
+import api from '../api';
 import util from '../../util';
 
 const name = 'funcType_undo';
 
 async function install() {
-  await base.setTitle({ title: chrome.i18n.getMessage(name) });
-  await base.setPopup({ popup: '' });
+  await api.setTitle({ title: chrome.i18n.getMessage(name) });
+  await api.setPopup({ popup: '' });
 }
 
 async function handle() {
@@ -19,6 +19,7 @@ async function handle() {
 }
 
 export default {
+  name,
   install,
   handle,
 };

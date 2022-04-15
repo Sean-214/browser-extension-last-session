@@ -8,24 +8,20 @@ const LAST_SESSION = { lastSession: { lastModified: 0, tabs: [] } };
  * 获取最近关闭的标签页和/或窗口的列表
  */
 function getRecentlyClosed(filter = null) {
-  return new Promise((resolve, reject) => {
-    chrome.sessions.getRecentlyClosed(filter, resolve);
-  });
+  return chrome.sessions.getRecentlyClosed(filter);
 }
 
 /**
  * 重新打开窗口或标签页
  */
 function restore(sessionId = null) {
-  return new Promise((resolve, reject) => {
-    chrome.sessions.restore(sessionId, resolve);
-  });
+  return chrome.sessions.restore(sessionId);
 }
 
 async function getLastSession(filter) {
   let _filter = filter;
   if (!_filter) {
-    _filter = item => !util.isInnerUrl(item.url) && !item.removed;
+    _filter = (item) => !util.isInnerUrl(item.url) && !item.removed;
   }
   const items = await storage.get(LAST_SESSION);
   items.lastSession.tabs = items.lastSession.tabs.filter(_filter);

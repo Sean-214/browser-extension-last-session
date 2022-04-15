@@ -1,25 +1,17 @@
 function get(keys) {
-  return new Promise(async (resolve, reject) => {
-    chrome.storage.local.get(keys, resolve);
-  });
+  return chrome.storage.local.get(keys);
 }
 
 function set(items) {
-  return new Promise(async (resolve, reject) => {
-    chrome.storage.local.set(items, resolve);
-  });
+  return chrome.storage.local.set(items);
 }
 
 function remove(keys) {
-  return new Promise(async (resolve, reject) => {
-    chrome.storage.local.remove(keys, resolve);
-  });
+  return chrome.storage.local.remove(keys);
 }
 
 function clear() {
-  return new Promise(async (resolve, reject) => {
-    chrome.storage.local.clear(resolve);
-  });
+  return chrome.storage.local.clear();
 }
 
 export default {

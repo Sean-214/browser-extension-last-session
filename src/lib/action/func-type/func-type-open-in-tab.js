@@ -1,12 +1,12 @@
 import tabs from '../../tabs';
-import base from '../base';
+import api from '../api';
 import { POPUP_PATH } from '../../constants';
 
 const name = 'funcType_openInTab';
 
 async function install() {
-  await base.setTitle({ title: chrome.i18n.getMessage(name) });
-  await base.setPopup({ popup: '' });
+  await api.setTitle({ title: chrome.i18n.getMessage(name) });
+  await api.setPopup({ popup: '' });
 }
 
 async function handle(tab) {
@@ -14,6 +14,7 @@ async function handle(tab) {
 }
 
 export default {
+  name,
   install,
   handle,
 };

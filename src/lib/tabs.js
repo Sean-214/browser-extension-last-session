@@ -8,33 +8,21 @@ const EXPIRES = 7 * 24 * 60 * 60 * 1000;
  * 获取当前标签页
  */
 function getCurrent() {
-  return new Promise((resolve, reject) => {
-    chrome.tabs.getCurrent(tab => {
-      resolve(tab);
-    });
-  });
+  return chrome.tabs.getCurrent();
 }
 
 /**
  * 查询标签页
  */
 function query(queryInfo = {}) {
-  return new Promise((resolve, reject) => {
-    chrome.tabs.query(queryInfo, tabs => {
-      resolve(tabs);
-    });
-  });
+  return chrome.tabs.query(queryInfo);
 }
 
 /**
  * 创建标签页
  */
 function create(createProperties = {}) {
-  return new Promise((resolve, reject) => {
-    chrome.tabs.create(createProperties, tab => {
-      resolve(tab);
-    });
-  });
+  return chrome.tabs.create(createProperties);
 }
 
 /**
@@ -56,20 +44,14 @@ async function active(url) {
  * 修改标签页
  */
 function update(tabId = null, updateProperties = {}) {
-  return new Promise((resolve, reject) => {
-    chrome.tabs.update(tabId, updateProperties, tab => {
-      resolve(tab);
-    });
-  });
+  return chrome.tabs.update(tabId, updateProperties);
 }
 
 /**
  * 关闭标签页
  */
 function remove(tabIds) {
-  return new Promise((resolve, reject) => {
-    chrome.tabs.remove(tabIds, resolve);
-  });
+  return chrome.tabs.remove(tabIds);
 }
 
 /**
@@ -80,6 +62,21 @@ async function removeCurrent() {
   if (tab) {
     await remove(tab.id);
   }
+}
+
+/**
+ * 将标签页添加到指定的组
+ */
+function group(groupId, tabIds) {
+  groupId = parseInt(groupId, 10);
+  return chrome.tabs.group({ groupId, tabIds });
+}
+
+/**
+ * 从各自的组中删除标签页
+ */
+function ungroup(tabIds) {
+  return chrome.tabs.ungroup(tabIds);
 }
 
 /**
@@ -96,7 +93,7 @@ function addUpdatedListener() {
       const now = Date.now();
       if (tab.favIconUrl) {
         const favIconDateUrl = await util.getBase64ByUrl(tab.favIconUrl);
-        cachedTabMap.set(tab.url, { ...newTab(tab), ...{ favIconDateUrl, expires: now } });
+        cachedTabMap.set(tab.url, { ...newTab(tab), favIconDateUrl, expires: now });
       }
       cachedTabs = [];
       for (const item of cachedTabMap.values()) {
@@ -124,6 +121,7 @@ function newTab(tab) {
     title: tab.title,
     favIconUrl: tab.favIconUrl,
     favIconDateUrl: tab.favIconDateUrl,
+    groupId: tab.groupId,
     removed: false,
   };
 }
@@ -136,6 +134,8 @@ export default {
   update,
   remove,
   removeCurrent,
+  group,
+  ungroup,
   addUpdatedListener,
   getCachedTabs,
   setCachedTabs,

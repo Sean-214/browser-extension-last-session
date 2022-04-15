@@ -12,8 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "clipboard": "^2.0.10",
-    "core-js": "^3.22.0",
-    "lodash": "^4.17.21"
+    "core-js": "^3.22.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
@@ -29,8 +28,8 @@
     "file-loader": "^6.2.0",
     "generate-json-webpack-plugin": "^2.0.0",
     "html-webpack-plugin": "^5.5.0",
-    "sass": "^1.50.0",
-    "sass-loader": "^12.6.0",
+    "less": "^4.1.2",
+    "less-loader": "^10.2.0",
     "minimist": ">=1.2.6",
     "prettier": "^2.6.2",
     "style-loader": "^3.3.1",

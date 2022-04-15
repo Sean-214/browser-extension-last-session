@@ -4,7 +4,7 @@ import util from '../lib/util';
 import { POPUP_PATH } from '../lib/constants';
 import '../assets/iconfont/iconfont.css';
 import '../assets/iconfont/iconfont.js';
-import './recent.scss';
+import './recent.less';
 
 document.addEventListener('DOMContentLoaded', () => {
   // 国际化
@@ -30,11 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 主动获取主题
-  chrome.runtime.sendMessage({ command: 'getTheme' }, theme => {
+  chrome.runtime.sendMessage({ command: 'getTheme' }, (theme) => {
     document.body.className = theme;
   });
   // 主动获取最近关闭列表
-  chrome.runtime.sendMessage({ command: 'getRecents' }, recents => {
+  chrome.runtime.sendMessage({ command: 'getRecents' }, (recents) => {
     refreshRecentList(recents);
   });
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const li = document.createElement('li');
       li.dataset.sessionId = item.sessionId;
       // 列表项单击事件
-      li.addEventListener('click', async event => {
+      li.addEventListener('click', async (event) => {
         event.preventDefault();
         const sessionId = li.dataset.sessionId;
         await sessions.restore(sessionId);

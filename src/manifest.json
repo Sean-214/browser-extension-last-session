@@ -1,8 +1,8 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "__MSG_title__",
   "version": "${version}",
-  "minimum_chrome_version": "70.0.0.0",
+  "minimum_chrome_version": "100.0.0.0",
   "description": "__MSG_description__",
   "author": "Sean-214",
   "homepage_url": "https://github.com/Sean-214/browser-extension-last-session",
@@ -14,7 +14,7 @@
     "64": "assets/icons/light/icon-64.png",
     "128": "assets/icons/light/icon-128.png"
   },
-  "browser_action": {
+  "action": {
     "default_title": "__MSG_title__"
   },
   "options_ui": {
@@ -23,14 +23,9 @@
     "chrome_style": true
   },
   "background": {
-    "scripts": ["background.js"],
-    "persistent": false
+    "service_worker": "background.js",
+    "type": "module"
   },
-  "permissions": [
-    "*://*/*",
-    "file:///*",
-    "sessions",
-    "storage",
-    "tabs"
-  ]
+  "permissions": ["sessions", "storage", "tabs", "tabGroups"],
+  "host_permissions": ["<all_urls>"]
 }

@@ -7,7 +7,7 @@ import util from './util';
  * 当上次未关闭页面为首页时无法保证Created事件和DOMContentLoaded事件的执行顺序
  */
 function addCreatedListener() {
-  chrome.windows.onCreated.addListener(async window => {
+  chrome.windows.onCreated.addListener(async (window) => {
     const lastSession = await sessions.getLastSession();
     const recentlyClosedSessions = await sessions.getRecentlyClosed();
     const map = new Map();

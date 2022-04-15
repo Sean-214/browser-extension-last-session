@@ -2,7 +2,7 @@ import tabs from '../lib/tabs';
 import util from '../lib/util';
 import '../assets/iconfont/iconfont.css';
 import '../assets/iconfont/iconfont.js';
-import './popup.scss';
+import './popup.less';
 
 document.addEventListener('DOMContentLoaded', () => {
   // 国际化
@@ -56,11 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let lastSession = null;
   // 主动获取主题
-  chrome.runtime.sendMessage({ command: 'getTheme' }, theme => {
+  chrome.runtime.sendMessage({ command: 'getTheme' }, (theme) => {
     document.body.className = theme;
   });
   // 主动获取标签列表
-  chrome.runtime.sendMessage({ command: 'getLastSession' }, session => {
+  chrome.runtime.sendMessage({ command: 'getLastSession' }, (session) => {
     lastSession = lastSession || session;
     if (session.lastModified > lastSession.lastModified) {
       lastSession = session;
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const btn = document.createElement('i');
       btn.className = 'btn iconfont icon-close';
       // 删除按钮单击事件
-      btn.addEventListener('click', event => {
+      btn.addEventListener('click', (event) => {
         const li = event.target.parentNode;
         li.className = li.className ? '' : 'removed';
         const url = li.dataset.tabUrl;
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
       title.className = 'title';
       title.href = item.url;
       // 标题单击事件
-      title.addEventListener('click', async event => {
+      title.addEventListener('click', async (event) => {
         event.preventDefault();
         const li = event.target.parentNode;
         li.className = 'removed';

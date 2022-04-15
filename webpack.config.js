@@ -4,7 +4,7 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const GenerateJsonPlugin = require('generate-json-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { POPUP_PATH, RECENT_PATH, OPTIONS_PATH } = require('./src/lib/constants');
-const { FUNC_TYPE_INFOS } = require('./src/lib/browser-action/func-type');
+const { FUNC_TYPE_INFOS } = require('./src/lib/action/func-type');
 const { version } = require('./package.json');
 const manifest = require('./src/manifest.json');
 
@@ -90,8 +90,8 @@ module.exports = (env, argv) => {
           use: ['style-loader', 'css-loader'],
         },
         {
-          test: /\.scss$/,
-          use: ['style-loader', 'css-loader', 'sass-loader'],
+          test: /\.less$/,
+          use: ['style-loader', 'css-loader', 'less-loader'],
         },
       ],
     },
