@@ -18,6 +18,15 @@ for (const item of THEME_LIST) {
 }
 
 /**
+ * 获取功能类型模块
+ * @param {String} name 功能类型名称
+ * @returns 功能类型模块
+ */
+export function getFuncTypeComponent(name) {
+  return _funcTypeCache.get(name);
+}
+
+/**
  * 选择单击图标的功能列表
  */
 export const FUNC_TYPE_LIST = [];
