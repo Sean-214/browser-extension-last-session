@@ -65,21 +65,6 @@ async function removeCurrent() {
 }
 
 /**
- * 将标签页添加到指定的组
- */
-function group(groupId, tabIds) {
-  groupId = parseInt(groupId, 10);
-  return chrome.tabs.group({ groupId, tabIds });
-}
-
-/**
- * 从各自的组中删除标签页
- */
-function ungroup(tabIds) {
-  return chrome.tabs.ungroup(tabIds);
-}
-
-/**
  * 标签更新后缓存标签信息，用于获取"favIconUrl"
  */
 function addUpdatedListener() {
@@ -134,8 +119,6 @@ export default {
   update,
   remove,
   removeCurrent,
-  group,
-  ungroup,
   addUpdatedListener,
   getCachedTabs,
   setCachedTabs,

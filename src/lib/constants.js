@@ -21,10 +21,21 @@ const THEME_DARK = {
   },
 };
 
+const COMMON_YES = {
+  value: 'yes',
+  label: 'common_yes',
+};
+const COMMON_NO = {
+  value: 'no',
+  label: 'common_no',
+};
+
 module.exports = {
   POPUP_PATH: 'popup.html',
   RECENT_PATH: 'recent.html',
   OPTIONS_PATH: 'options.html',
   THEME_DEFAULT: THEME_LIGHT,
   THEME_LIST: [THEME_LIGHT, THEME_DARK],
+  COMMON_YES,
+  COMMON_NO,
 };

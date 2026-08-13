@@ -15,7 +15,9 @@ async function setTheme(value) {
   const items = await storage.get(OPTIONS);
   items.options.theme = value;
   await storage.set(items);
-  chrome.runtime.sendMessage({ command: 'setTheme', data: value });
+  try {
+    await chrome.runtime.sendMessage({ command: 'setTheme', data: value });
+  } catch (e) {}
 }
 
 async function getFuncType(defaultValue) {
@@ -46,9 +48,25 @@ async function setRecentSize(value) {
   await storage.set(items);
 }
 
+async function getExcludeGroupedTabs() {
+  const items = await storage.get(OPTIONS);
+  if (items.options.excludeGroupedTabs != null) {
+    return Boolean(items.options.excludeGroupedTabs);
+  }
+  return false;
+}
+
+async function setExcludeGroupedTabs(value) {
+  const items = await storage.get(OPTIONS);
+  items.options.excludeGroupedTabs = Boolean(value);
+  await storage.set(items);
+}
+
 async function clear() {
   await storage.clear();
-  chrome.runtime.sendMessage({ command: 'clearStorage' });
+  try {
+    await chrome.runtime.sendMessage({ command: 'clearStorage' });
+  } catch (e) {}
 }
 
 export default {
@@ -58,5 +76,7 @@ export default {
   setFuncType,
   getRecentSize,
   setRecentSize,
+  getExcludeGroupedTabs,
+  setExcludeGroupedTabs,
   clear,
 };

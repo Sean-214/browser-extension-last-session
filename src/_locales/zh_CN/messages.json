@@ -1,4 +1,6 @@
 {
+  "common_yes": { "message": "是" },
+  "common_no": { "message": "否" },
   "title": { "message": "上次未关闭页面" },
   "title_recent": { "message": "最近关闭的页面" },
   "description": { "message": "显示上次关闭窗口时未关闭的标签页" },
@@ -16,5 +18,6 @@
   "funcType_openInTab": { "message": "在标签页中打开上次未关闭页面" },
   "funcType_openInPopup": { "message": "在弹出窗口中打开上次未关闭页面" },
   "recentSizeLabel": { "message": "最近关闭列表大小" },
+  "excludeGroupedTabsLabel": { "message": "排除已分组的标签页" },
   "clearData": { "message": "清除数据" }
 }

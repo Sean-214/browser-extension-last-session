@@ -6,7 +6,7 @@ import '../assets/iconfont/iconfont.css';
 import '../assets/iconfont/iconfont.js';
 import './recent.less';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   // 国际化
   const MSG_TITLE_RECENT = chrome.i18n.getMessage('title_recent');
   const MSG_LAST_SESSION = chrome.i18n.getMessage('title');
@@ -30,13 +30,17 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 主动获取主题
-  chrome.runtime.sendMessage({ command: 'getTheme' }, (theme) => {
+  try {
+    const theme = await chrome.runtime.sendMessage({ command: 'getTheme' });
     document.body.className = theme;
-  });
+  } catch (e) {}
+
   // 主动获取最近关闭列表
-  chrome.runtime.sendMessage({ command: 'getRecents' }, (recents) => {
+  try {
+    const getRecents = await chrome.runtime.sendMessage({ command: 'getRecents' });
     refreshRecentList(recents);
-  });
+  } catch (e) {}
+
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     switch (message.command) {
       // 被动接收主题

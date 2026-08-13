@@ -4,7 +4,7 @@ import '../assets/iconfont/iconfont.css';
 import '../assets/iconfont/iconfont.js';
 import './popup.less';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   // 国际化
   const MSG_TITLE = chrome.i18n.getMessage('title');
   const MSG_VIEW_HISTORY = chrome.i18n.getMessage('viewHistory');
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 全部删除按钮单击事件
   const removeAll = document.getElementById('remove-all');
   removeAll.textContent = MSG_REMOVE_ALL;
-  removeAll.addEventListener('click', () => {
+  removeAll.addEventListener('click', async () => {
     const ul = document.getElementById('tab-list');
     let removed = false;
     for (const li of ul.children) {
@@ -29,7 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
     for (const li of ul.children) {
       li.className = removed ? 'removed' : '';
     }
-    chrome.runtime.sendMessage({ command: 'setRemoved', data: { removed } });
+    try {
+      await chrome.runtime.sendMessage({ command: 'setRemoved', data: { removed } });
+    } catch (e) {}
   });
 
   // 打开全部按钮单击事件
@@ -43,7 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
         await tabs.create({ url, active: false });
       }
     }
-    chrome.runtime.sendMessage({ command: 'setRemoved', data: { removed: true } });
+    try {
+      await chrome.runtime.sendMessage({ command: 'setRemoved', data: { removed: true } });
+    } catch (e) {}
     await tabs.removeCurrent();
   });
 
@@ -55,18 +59,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   let lastSession = null;
+
   // 主动获取主题
-  chrome.runtime.sendMessage({ command: 'getTheme' }, (theme) => {
+  try {
+    const theme = await chrome.runtime.sendMessage({ command: 'getTheme' });
     document.body.className = theme;
-  });
+  } catch (e) {}
+
   // 主动获取标签列表
-  chrome.runtime.sendMessage({ command: 'getLastSession' }, (session) => {
+  try {
+    const session = await chrome.runtime.sendMessage({ command: 'getLastSession' });
     lastSession = lastSession || session;
     if (session.lastModified > lastSession.lastModified) {
       lastSession = session;
     }
     refreshTabList(lastSession);
-  });
+  } catch (e) {}
+
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     switch (message.command) {
       // 被动接收主题
@@ -104,11 +113,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const btn = document.createElement('i');
       btn.className = 'btn iconfont icon-close';
       // 删除按钮单击事件
-      btn.addEventListener('click', (event) => {
+      btn.addEventListener('click', async (event) => {
         const li = event.target.parentNode;
         li.className = li.className ? '' : 'removed';
         const url = li.dataset.tabUrl;
-        chrome.runtime.sendMessage({ command: 'setRemoved', data: { url } });
+        try {
+          await chrome.runtime.sendMessage({ command: 'setRemoved', data: { url } });
+        } catch (e) {}
       });
       // 创建图标
       let icon;
@@ -135,7 +146,9 @@ document.addEventListener('DOMContentLoaded', () => {
         li.className = 'removed';
         const url = li.dataset.tabUrl;
         await tabs.create({ url, active: false });
-        chrome.runtime.sendMessage({ command: 'setRemoved', data: { url, removed: true } });
+        try {
+          await chrome.runtime.sendMessage({ command: 'setRemoved', data: { url, removed: true } });
+        } catch (e) {}
       });
       const titleText = document.createTextNode(item.title);
       title.title = item.title;
