@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // 主动获取最近关闭列表
   try {
-    const getRecents = await chrome.runtime.sendMessage({ command: 'getRecents' });
+    const recents = await chrome.runtime.sendMessage({ command: 'getRecents' });
     refreshRecentList(recents);
   } catch (e) {}
 

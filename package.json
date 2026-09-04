@@ -1,6 +1,6 @@
 {
   "name": "last-session",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "private": true,
   "scripts": {
     "lint": "eslint --fix --ignore-pattern \"src/assets/iconfont/**\" \"src/**/*.js\"",
@@ -28,13 +28,13 @@
     "file-loader": "^6.2.0",
     "generate-json-webpack-plugin": "^2.0.0",
     "html-webpack-plugin": "^5.6.8",
-    "less": "^4.8.1",
+    "less": "^4.9.1",
     "less-loader": "^10.2.0",
     "minimist": "^1.2.8",
     "prettier": "^2.8.8",
     "style-loader": "^3.3.4",
     "terser-webpack-plugin": "^5.6.1",
-    "webpack": "^5.109.2",
+    "webpack": "^5.110.3",
     "webpack-cli": "^4.10.0"
   }
 }
